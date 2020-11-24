@@ -14,4 +14,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/configUsuNomeEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@drawable/bg_edit_text"
+            android:ems="10"
+            android:hint="@string/config_usuario_nome_hint"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/configUsuEnderecoEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:autofillHints=""
+            android:background="@drawable/bg_edit_text"
+            android:ems="10"
+            android:hint="@string/config_usuario_endereco_hint"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/configEmpSalvarButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            android:onClick="validarDadosUsuario"
+            android:text="@string/config_usuario_button_text"
+            android:theme="@style/buttonStyle" />
+
+    </LinearLayout>
+
 </LinearLayout>

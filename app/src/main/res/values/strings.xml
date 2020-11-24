@@ -21,4 +21,7 @@
     <string name="novoProduto_descricao_hint">Descrição do produto</string>
     <string name="novoProduto_preco_hint">Preço</string>
     <string name="novoProduto_salvar_button">Salvar Produto</string>
+    <string name="config_usuario_nome_hint">Nome</string>
+    <string name="config_usuario_endereco_hint">Endereço completo</string>
+    <string name="config_usuario_button_text">Salvar</string>
 </resources>
