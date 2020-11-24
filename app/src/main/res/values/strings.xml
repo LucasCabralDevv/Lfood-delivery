@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">App Lfood</string>
+    <string name="auth_email_hint">E-mail</string>
+    <string name="auth_senha_hint">Senha</string>
+    <string name="auth_cadastrar_text">Cadastre-se</string>
+    <string name="auth_logar_text">Logar</string>
+    <string name="auth_acesso_button">Acessar</string>
+    <string name="auth_empresa_text">Empresa</string>
+    <string name="auth_usuario_text">Usuário</string>
+    <string name="acesso_logo_image">Imagem Logo</string>
+    <string name="menu_add_text">Novo Produto</string>
+    <string name="menu_config_text">Configurações</string>
+    <string name="menu_sair_text">Sair</string>
+    <string name="menu_pesquisa_text">Pesquisa</string>
+    <string name="configE_nomeE_hint">Nome Empresa</string>
+    <string name="configE_categoria_hint">Categoria</string>
+    <string name="configE_tempo_hint">Tempo de entrega</string>
+    <string name="configE_taxa_hint">Taxa de entrega</string>
+    <string name="configEmp_salvar_button">Salvar</string>
+    <string name="novoProduto_nome_hint">Nome do produto</string>
+    <string name="novoProduto_descricao_hint">Descrição do produto</string>
+    <string name="novoProduto_preco_hint">Preço</string>
+    <string name="novoProduto_salvar_button">Salvar Produto</string>
+</resources>

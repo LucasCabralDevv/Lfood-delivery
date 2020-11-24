@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".activity.AutenticacaoActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/acesso_logo_image"
+        app:srcCompat="@drawable/logonovo" />
+
+    <EditText
+        android:id="@+id/authEmailEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edit_text"
+        android:ems="10"
+        android:hint="@string/auth_email_hint"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textColor="@android:color/darker_gray"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/authSenhaEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-2dp"
+        android:background="@drawable/bg_edit_text"
+        android:ems="10"
+        android:hint="@string/auth_senha_hint"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:textColor="@android:color/darker_gray"
+        android:autofillHints="" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/auth_logar_text"
+            android:textColor="@color/red_700"
+            android:textSize="15sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchTipoAcesso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:thumbTint="@color/red_700"/>
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/auth_cadastrar_text"
+            android:textColor="@color/red_700"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearTipoUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/auth_usuario_text"
+            android:textColor="@color/red_700"
+            android:textSize="14sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchTipoUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:thumbTint="@color/red_700" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/auth_empresa_text"
+            android:textColor="@color/red_700"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonAcesso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/auth_acesso_button"
+        android:theme="@style/buttonStyle" />
+
+</LinearLayout>

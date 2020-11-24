@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/adapterImagemProduto"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/perfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/adapterImagemProduto"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/adapterNomeProduto"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:maxLines="1"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Sushi de salmão" />
+
+        <TextView
+            android:id="@+id/adapterDescricaoProduto"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:maxLines="2"
+            android:textSize="14sp"
+            tools:text="Salmão com o nosso delicioso tempero" />
+
+        <TextView
+            android:id="@+id/adapterPrecoProduto"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:maxLines="1"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="R$ 19.90" />
+    </LinearLayout>
+
+    <include
+        layout="@layout/divisor"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

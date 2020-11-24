@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ConfiguracoesEmpresaActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/configEmpPerfilImageView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/perfil" />
+
+        <EditText
+            android:id="@+id/configEmpNomeEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@drawable/bg_edit_text"
+            android:ems="10"
+            android:hint="@string/configE_nomeE_hint"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/configEmpCategoriaEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:autofillHints=""
+            android:background="@drawable/bg_edit_text"
+            android:ems="10"
+            android:hint="@string/configE_categoria_hint"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/configEmpTempoEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:autofillHints=""
+            android:background="@drawable/bg_edit_text"
+            android:ems="10"
+            android:hint="@string/configE_tempo_hint"
+            android:inputType="number|text"
+            android:padding="16dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/configEmpTaxaEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:autofillHints=""
+            android:background="@drawable/bg_edit_text"
+            android:ems="10"
+            android:hint="@string/configE_taxa_hint"
+            android:inputType="number|text"
+            android:padding="16dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/configEmpSalvarButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="validarDadosEmpresa"
+            android:padding="16dp"
+            android:text="@string/configEmp_salvar_button"
+            android:theme="@style/buttonStyle" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

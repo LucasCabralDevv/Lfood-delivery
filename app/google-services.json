@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "952804645090",
+    "firebase_url": "https://lfood2-cdfa9.firebaseio.com",
+    "project_id": "lfood2-cdfa9",
+    "storage_bucket": "lfood2-cdfa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952804645090:android:7569939f3e14d5195066bb",
+        "android_client_info": {
+          "package_name": "com.lucascabral.lfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952804645090-eag2n3uvo70984nua2t8e043k7cha8k8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lucascabral.lfood",
+            "certificate_hash": "a5ee796117267ccb5a65c398e13b5c8af49403a6"
+          }
+        },
+        {
+          "client_id": "952804645090-1rlqcpdc40dm44m4kc0g926q06jc4nbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmEEm0y2V0cVkjIZvuA2Q6TjiOxhcxrkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952804645090-1rlqcpdc40dm44m4kc0g926q06jc4nbm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
