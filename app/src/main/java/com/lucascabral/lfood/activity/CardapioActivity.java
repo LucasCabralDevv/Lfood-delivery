@@ -2,12 +2,17 @@ package com.lucascabral.lfood.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +28,10 @@ import com.lucascabral.lfood.R;
 import com.lucascabral.lfood.adapter.AdapterProduto;
 import com.lucascabral.lfood.helper.ConfiguracaoFirebase;
 import com.lucascabral.lfood.helper.UsuarioFirebase;
+import com.lucascabral.lfood.listener.RecyclerItemClickListener;
 import com.lucascabral.lfood.model.Empresa;
+import com.lucascabral.lfood.model.ItemPedido;
+import com.lucascabral.lfood.model.Pedido;
 import com.lucascabral.lfood.model.Produto;
 import com.lucascabral.lfood.model.Usuario;
 import com.squareup.picasso.Picasso;
@@ -44,9 +52,11 @@ public class CardapioActivity extends AppCompatActivity {
 
     private AdapterProduto adapterProduto;
     private List<Produto> produtos = new ArrayList<>();
+    private List<ItemPedido> itensCarrinho = new ArrayList<>();
     private DatabaseReference firebaseRef;
     private String idEmpresa;
     private String idUsuarioLogado;
+    private Pedido pedidoRecuperado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +79,97 @@ public class CardapioActivity extends AppCompatActivity {
         adapterProduto = new AdapterProduto(produtos, this);
         recyclerProdutosCardapio.setAdapter(adapterProduto);
 
+        // Criando evento de click
+        recyclerProdutosCardapio.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        this,
+                        recyclerProdutosCardapio,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                                confirmarQuantidade(position);
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                ));
+
         recuperarProdutos();
 
         recuperarDadosUsuario();
     }
 
-    private void recuperarDadosUsuario(){
+    private void confirmarQuantidade(int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(CardapioActivity.this);
+        builder.setTitle("Quantidade");
+        builder.setMessage("Digite a quantidade!");
+
+        EditText editQuantidade = new EditText(this);
+        //editQuantidade.setInputType(1);
+        editQuantidade.setText("1");
+
+        builder.setView(editQuantidade);
+
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                //Recupera a quantidade
+                String quantidade = editQuantidade.getText().toString();
+
+                if (!quantidade.equals("0")){
+
+                    Produto produtoSelecionado = produtos.get(position);
+                    ItemPedido itemPedido = new ItemPedido();
+                    itemPedido.setIdProduto(produtoSelecionado.getIdProduto());
+                    itemPedido.setNomeProduto(produtoSelecionado.getNome());
+                    itemPedido.setPreco(produtoSelecionado.getPreco());
+                    itemPedido.setQuantidade(Integer.parseInt(quantidade));
+
+                    itensCarrinho.add(itemPedido);
+
+                    if (pedidoRecuperado == null){
+                        pedidoRecuperado = new Pedido(idUsuarioLogado, idEmpresa);
+                    }
+
+                    pedidoRecuperado.setNomeCliente(usuario.getNome());
+                    pedidoRecuperado.setEnderecoCliente(usuario.getEndereco());
+                    pedidoRecuperado.setItens(itensCarrinho);
+                    pedidoRecuperado.salvar();
+
+                }else{
+
+                    Toast.makeText(CardapioActivity.this,
+                            "Digite uma quantidade!",
+                            Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void recuperarDadosUsuario() {
 
         dialog = new SpotsDialog.Builder()
                 .setContext(this)
@@ -90,7 +185,7 @@ public class CardapioActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.getValue() != null){
+                if (snapshot.getValue() != null) {
 
                     usuario = snapshot.getValue(Usuario.class);
                 }
