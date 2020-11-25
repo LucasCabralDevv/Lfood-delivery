@@ -107,6 +107,7 @@ public class ConfiguracoesUsuarioActivity extends AppCompatActivity {
     }
 
     private void configurandoToolbar() {
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Configurações usuário");
         setSupportActionBar(toolbar);

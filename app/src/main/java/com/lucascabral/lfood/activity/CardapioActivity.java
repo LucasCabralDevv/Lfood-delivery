@@ -1,6 +1,11 @@
 package com.lucascabral.lfood.activity;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +22,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.lucascabral.lfood.R;
 import com.lucascabral.lfood.adapter.AdapterProduto;
 import com.lucascabral.lfood.helper.ConfiguracaoFirebase;
+import com.lucascabral.lfood.helper.UsuarioFirebase;
 import com.lucascabral.lfood.model.Empresa;
 import com.lucascabral.lfood.model.Produto;
+import com.lucascabral.lfood.model.Usuario;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import dmax.dialog.SpotsDialog;
 
 public class CardapioActivity extends AppCompatActivity {
 
@@ -30,11 +39,14 @@ public class CardapioActivity extends AppCompatActivity {
     private ImageView imageEmpresaCardapio;
     private TextView textNomeEmpresaCardapio;
     private Empresa empresaSelecionada;
-    private String idEmpresa;
+    private AlertDialog dialog;
+    private Usuario usuario;
 
     private AdapterProduto adapterProduto;
     private List<Produto> produtos = new ArrayList<>();
     private DatabaseReference firebaseRef;
+    private String idEmpresa;
+    private String idUsuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,43 @@ public class CardapioActivity extends AppCompatActivity {
         recyclerProdutosCardapio.setAdapter(adapterProduto);
 
         recuperarProdutos();
+
+        recuperarDadosUsuario();
+    }
+
+    private void recuperarDadosUsuario(){
+
+        dialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Carregando dados")
+                .setCancelable(false)
+                .build();
+        dialog.show();
+
+        DatabaseReference usuariosRef = firebaseRef
+                .child("usuarios")
+                .child(idUsuarioLogado);
+        usuariosRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.getValue() != null){
+
+                    usuario = snapshot.getValue(Usuario.class);
+                }
+                recuperarPedido();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void recuperarPedido() {
+
+        dialog.dismiss();
     }
 
     private void recuperarProdutos() {
@@ -102,6 +151,27 @@ public class CardapioActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_cardapio, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menuPedido:
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void inicializarComponentes() {
 
         //Componenetes
@@ -111,6 +181,7 @@ public class CardapioActivity extends AppCompatActivity {
 
         //Configuração firebase
         firebaseRef = ConfiguracaoFirebase.getFirebase();
+        idUsuarioLogado = UsuarioFirebase.getIdUsuario();
     }
 
     private void configurandoToolbar() {

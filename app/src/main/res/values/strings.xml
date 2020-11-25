@@ -24,4 +24,8 @@
     <string name="config_usuario_nome_hint">Nome</string>
     <string name="config_usuario_endereco_hint">Endereço completo</string>
     <string name="config_usuario_button_text">Salvar</string>
+    <string name="cardapio_carrinho_text">Ver carrinho</string>
+    <string name="cardapio_qtd_text">qtd: 0</string>
+    <string name="cardapio_reais_text">R$ 0</string>
+    <string name="menu_confirmarPedido_text">Confirmar pedido</string>
 </resources>

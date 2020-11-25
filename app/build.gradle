@@ -53,6 +53,9 @@ dependencies {
 
     //Dependência Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //Dependência dialog de progresso
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
 }
 
     apply plugin: 'com.google.gms.google-services'
