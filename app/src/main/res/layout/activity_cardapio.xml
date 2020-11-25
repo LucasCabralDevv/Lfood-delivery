@@ -66,7 +66,7 @@
                 android:textColor="@color/white_500" />
 
             <TextView
-                android:id="@+id/cardapioQntCarrinhoText"
+                android:id="@+id/cardapioCarrinhoQtdText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
