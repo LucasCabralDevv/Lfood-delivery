@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
@@ -11,41 +10,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        tools:text="Lucas Oliveira"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Lucas Oliveira" />
 
     <TextView
         android:id="@+id/textPedidoEndereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Endereço: rua almeida prado, 1300"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="Endereço: rua almeida prado, 1300" />
 
     <TextView
         android:id="@+id/textPedidoPgto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Pgto: Dinheiro"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="Pgto: Dinheiro" />
 
     <TextView
         android:id="@+id/textPedidoObs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        tools:text="Obs: teste"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="Obs: teste" />
 
     <TextView
         android:id="@+id/textPedidoItens"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="1) Filé Cinco Queijos (1 X R$ 16.50)"
         android:textColor="@color/accent_200"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="1) Filé Cinco Queijos (1 X R$ 16.50)" />
 
     <include layout="@layout/divisor" />
 

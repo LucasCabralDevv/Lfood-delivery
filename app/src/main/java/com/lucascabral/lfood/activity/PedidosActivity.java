@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +22,7 @@ import com.lucascabral.lfood.R;
 import com.lucascabral.lfood.adapter.AdapterPedido;
 import com.lucascabral.lfood.helper.ConfiguracaoFirebase;
 import com.lucascabral.lfood.helper.UsuarioFirebase;
+import com.lucascabral.lfood.listener.RecyclerItemClickListener;
 import com.lucascabral.lfood.model.Pedido;
 
 import java.util.ArrayList;
@@ -29,7 +34,7 @@ public class PedidosActivity extends AppCompatActivity {
 
     private RecyclerView recyclerPedidos;
     private AdapterPedido adapterPedido;
-    private List<Pedido> pedidos = new ArrayList<>();
+    private final List<Pedido> pedidos = new ArrayList<>();
     private AlertDialog dialog;
     private DatabaseReference firebaseRef;
     private String idEmpresa;
@@ -52,8 +57,8 @@ public class PedidosActivity extends AppCompatActivity {
 
         dialog = new SpotsDialog.Builder()
                 .setContext(this)
-                .setMessage("Carregando dados")
-                .setCancelable(false)
+                .setMessage("Esperando pedidos")
+                .setCancelable(true)
                 .build();
         dialog.show();
 
@@ -68,9 +73,9 @@ public class PedidosActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 pedidos.clear();
-                if (snapshot.getValue() != null){
+                if (snapshot.getValue() != null) {
 
-                    for (DataSnapshot ds: snapshot.getChildren()){
+                    for (DataSnapshot ds : snapshot.getChildren()) {
                         Pedido pedido = ds.getValue(Pedido.class);
                         pedidos.add(pedido);
                     }
@@ -88,10 +93,108 @@ public class PedidosActivity extends AppCompatActivity {
     }
 
     private void configuraRecyclerView() {
+
         recyclerPedidos.setLayoutManager(new LinearLayoutManager(this));
         recyclerPedidos.setHasFixedSize(true);
         adapterPedido = new AdapterPedido(pedidos);
         recyclerPedidos.setAdapter(adapterPedido);
+
+        //Criando evento de click para o recyclerView
+        recyclerPedidos.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        this,
+                        recyclerPedidos,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                                aceitarOuRecusarPedido(position);
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                                apagarPedido(position);
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
+    }
+
+    private void apagarPedido(int position) {
+
+        Pedido pedidoSelecionado = pedidos.get(position);
+        androidx.appcompat.app.AlertDialog.Builder alertDialog = new androidx.appcompat.app.AlertDialog.Builder(PedidosActivity.this);
+
+        alertDialog.setTitle("Apagar pedido");
+        alertDialog.setMessage("Deseja realmente apagar o pedido? " +
+                "Após apagado o pedido será cancelado.");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                pedidoSelecionado.removerConfirmado();
+                adapterPedido.notifyItemRemoved(position);
+                Toast.makeText(PedidosActivity.this,
+                        "Pedido cancelado com sucesso",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        androidx.appcompat.app.AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+    private void aceitarOuRecusarPedido(int position) {
+
+        Pedido pedidoSelecionado = pedidos.get(position);
+        androidx.appcompat.app.AlertDialog.Builder alertDialog = new androidx.appcompat.app.AlertDialog.Builder(PedidosActivity.this);
+
+        alertDialog.setTitle("Aceitar o pedido");
+        alertDialog.setMessage("Deseja realmente aceitar o pedido?");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                pedidoSelecionado.setStatus("Finalizado");
+                pedidoSelecionado.atualizarStatus();
+                adapterPedido.notifyDataSetChanged();
+                Toast.makeText(PedidosActivity.this,
+                        "Pedido aceito com sucesso",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(PedidosActivity.this,
+                        "Pedido não foi aceito. Click pressionado para cancelá-lo.",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        androidx.appcompat.app.AlertDialog alert = alertDialog.create();
+        alert.show();
     }
 
     private void inicializarComponentes() {

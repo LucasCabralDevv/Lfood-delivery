@@ -1,5 +1,6 @@
 package com.lucascabral.lfood.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class AdapterPedido extends RecyclerView.Adapter<AdapterPedido.MyViewHolder> {
 
-    private List<Pedido> pedidos;
+    private final List<Pedido> pedidos;
 
     public AdapterPedido(List<Pedido> pedidos) {
         this.pedidos = pedidos;
@@ -33,6 +34,7 @@ public class AdapterPedido extends RecyclerView.Adapter<AdapterPedido.MyViewHold
         return new MyViewHolder(itemLista);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
@@ -61,7 +63,7 @@ public class AdapterPedido extends RecyclerView.Adapter<AdapterPedido.MyViewHold
         holder.itens.setText(descricaoItens);
 
         int metodoPagamento = pedido.getMetodoPagamento();
-        String pagamento = metodoPagamento == 0 ? "Dinheiro" : "Máquina de cartão";
+        String pagamento = metodoPagamento == 0 ? "Dinheiro" : "Máquina cartão";
         holder.pgto.setText("pgto: " + pagamento);
 
     }

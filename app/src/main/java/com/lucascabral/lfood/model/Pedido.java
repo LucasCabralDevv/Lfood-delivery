@@ -3,6 +3,7 @@ package com.lucascabral.lfood.model;
 import com.google.firebase.database.DatabaseReference;
 import com.lucascabral.lfood.helper.ConfiguracaoFirebase;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Pedido {
@@ -34,7 +35,7 @@ public class Pedido {
         setIdPedido(pedidoRef.push().getKey());
     }
 
-    public void salvar(){
+    public void salvar() {
 
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
         DatabaseReference pedidoRef = firebaseRef
@@ -45,7 +46,31 @@ public class Pedido {
 
     }
 
-    public void remover(){
+    public void removerConfirmado() {
+
+        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+        DatabaseReference pedidoRef = firebaseRef
+                .child("pedidos")
+                .child(getIdEmpresa())
+                .child(getIdPedido());
+        pedidoRef.removeValue();
+
+    }
+
+    public void atualizarStatus() {
+
+        HashMap<String, Object> status = new HashMap<>();
+        status.put("status", getStatus());
+
+        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+        DatabaseReference pedidoRef = firebaseRef
+                .child("pedidos")
+                .child(getIdEmpresa())
+                .child(getIdPedido());
+        pedidoRef.updateChildren(status);
+    }
+
+    public void remover() {
 
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
         DatabaseReference pedidoRef = firebaseRef
@@ -56,7 +81,7 @@ public class Pedido {
 
     }
 
-    public void confirmar(){
+    public void confirmar() {
 
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
         DatabaseReference pedidoRef = firebaseRef
