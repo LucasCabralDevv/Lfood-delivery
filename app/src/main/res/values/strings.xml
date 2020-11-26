@@ -28,4 +28,5 @@
     <string name="cardapio_qtd_text">qtd: 0</string>
     <string name="cardapio_reais_text">R$ 0</string>
     <string name="menu_confirmarPedido_text">Confirmar pedido</string>
+    <string name="menu_pedidos_text">Pedidos</string>
 </resources>
